@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Song> songs = Song.songs;
-    List<Playlist> playlists = Playlist.playlist;
+    List<Playlist> playlists = Playlist.playlists;
 
     return
       Container(
@@ -32,28 +32,42 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const _DiscoverMusic(),
                 _TrendingMusic(songs: songs),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      const SectionHeader(title: 'Playlist'),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.only(top: 20),
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: playlists.length,
-                          itemBuilder: ((context, index) {
-                            return PlaylistCard(playlist: playlists[index]);
-                          }),
-                      ),
-                    ],
-                  ),
-                ),
+                _PlaylistMusic(playlists: playlists),
               ],
             ),
           ),
         ),
       );
+  }
+}
+
+class _PlaylistMusic extends StatelessWidget {
+  const _PlaylistMusic({
+    Key? key,
+    required this.playlists,
+  }) : super(key: key);
+
+  final List<Playlist> playlists;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          const SectionHeader(title: 'Playlist'),
+          ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(top: 20),
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: playlists.length,
+              itemBuilder: ((context, index) {
+                return PlaylistCard(playlist: playlists[index]);
+              }),
+          ),
+        ],
+      ),
+    );
   }
 }
 

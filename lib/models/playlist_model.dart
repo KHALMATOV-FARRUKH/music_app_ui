@@ -11,17 +11,19 @@ class Playlist {
     required this.imageUrl,
   });
   
-  static List<Playlist> playlist = [
+  static List<Playlist> playlists = [
     Playlist(
         title: 'Hip-hop R&B Mix',
         songs: Song.songs,
-        imageUrl: 'https://i.ytimg.com/vi/9BIcIPfaAvw/maxresdefault.jpg'
+        imageUrl: 'https://assets.podomatic.net/ts/ce/a4/e3/remixcast-com/3000x3000_11252781.jpg'
     ),
+
     Playlist(
         title: 'Rock & Roll',
         songs: Song.songs,
         imageUrl: 'https://m.media-amazon.com/images/I/81RREHzayLL._AC_UL960_QL65_.jpg'
     ),
+
     Playlist(
         title: 'Techno',
         songs: Song.songs,
