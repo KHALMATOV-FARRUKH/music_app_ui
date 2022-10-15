@@ -23,22 +23,22 @@ class SongCard extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             Container(
-            width: MediaQuery.of(context).size.width * 0.45,
-            decoration:  BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: DecorationImage(
-                image: AssetImage(
-                  song.coverUrl,
+              width: MediaQuery.of(context).size.width * 0.45,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                image: DecorationImage(
+                  image: AssetImage(
+                    song.coverUrl,
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
-             ),
             ),
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width * 0.37,
               margin: const EdgeInsets.only(bottom: 10),
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: Colors.white.withOpacity(0.8),
               ),
@@ -49,21 +49,21 @@ class SongCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    Text(
-                      song.title,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Colors.deepPurple,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        song.title,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      song.description,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        song.description,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                   ],
+                    ],
                   ),
                   const Icon(
                     Icons.play_circle,

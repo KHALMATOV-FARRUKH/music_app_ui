@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:music_app_ui/models/playlist_model.dart';
+
+import '../models/playlist_model.dart';
 import '../models/song_model.dart';
 import '../widgets/widgets.dart';
 
@@ -11,33 +12,32 @@ class HomeScreen extends StatelessWidget {
     List<Song> songs = Song.songs;
     List<Playlist> playlists = Playlist.playlists;
 
-    return
-      Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.deepPurple.shade800.withOpacity(0.8),
-              Colors.deepPurple.shade200.withOpacity(0.8),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.deepPurple.shade800.withOpacity(0.8),
+            Colors.deepPurple.shade200.withOpacity(0.8),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: const _CustomAppBar(),
+        bottomNavigationBar: const _CustomNavBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const _DiscoverMusic(),
+              _TrendingMusic(songs: songs),
+              _PlaylistMusic(playlists: playlists),
             ],
           ),
         ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: const _CustomAppBar(),
-          bottomNavigationBar: const _CustomNavBar(),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const _DiscoverMusic(),
-                _TrendingMusic(songs: songs),
-                _PlaylistMusic(playlists: playlists),
-              ],
-            ),
-          ),
-        ),
-      );
+      ),
+    );
   }
 }
 
@@ -55,63 +55,15 @@ class _PlaylistMusic extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const SectionHeader(title: 'Playlist'),
+          const SectionHeader(title: 'Playlists'),
           ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(top: 20),
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: playlists.length,
-              itemBuilder: ((context, index) {
-                return PlaylistCard(playlist: playlists[index]);
-              }),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PlaylistCard extends StatelessWidget {
-  const PlaylistCard({
-    Key? key,
-    required this.playlist,
-  }) : super(key: key);
-
-  final Playlist playlist;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: Image.network(
-              playlist.imageUrl,
-              height: 50,
-              width: 50,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Column(
-            children: [
-              Text(
-                playlist.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(
-                  fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '${playlist.songs.length} songs',
-                maxLines: 2,
-                style:
-                Theme.of(context)
-                    .textTheme
-                    .bodySmall,
-              ),
-            ],
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(top: 20),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: playlists.length,
+            itemBuilder: ((context, index) {
+              return PlaylistCard(playlist: playlists[index]);
+            }),
           ),
         ],
       ),
@@ -145,11 +97,11 @@ class _TrendingMusic extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.27,
             child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: songs.length,
-                itemBuilder: (context, index) {
-                  return SongCard(song: songs[index]);
-                },
+              scrollDirection: Axis.horizontal,
+              itemCount: songs.length,
+              itemBuilder: (context, index) {
+                return SongCard(song: songs[index]);
+              },
             ),
           ),
         ],
@@ -157,10 +109,6 @@ class _TrendingMusic extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 class _DiscoverMusic extends StatelessWidget {
   const _DiscoverMusic({
@@ -176,9 +124,7 @@ class _DiscoverMusic extends StatelessWidget {
         children: [
           Text(
             'Welcome',
-            style: Theme.of(context)
-              .textTheme
-              .bodyLarge
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 5),
           Text(
@@ -199,8 +145,7 @@ class _DiscoverMusic extends StatelessWidget {
                   .textTheme
                   .bodyMedium!
                   .copyWith(color: Colors.grey.shade400),
-              prefixIcon:
-                  Icon(Icons.search, color: Colors.grey.shade400),
+              prefixIcon: Icon(Icons.search, color: Colors.grey.shade400),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide.none,
@@ -234,7 +179,7 @@ class _CustomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite_outline),
-          label: 'Favorite',
+          label: 'Favorites',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.play_circle_outline),
@@ -262,13 +207,13 @@ class _CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leading: const Icon(Icons.grid_view_rounded),
       actions: [
         Container(
-          margin: const EdgeInsets.only(right: 20,),
+          margin: const EdgeInsets.only(right: 20),
           child: const CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://gearbox.imgix.net/https%3A%2F%2Fix-www.imgix.net%2Fsolutions%2Fwindmills.jpg?q=75&auto=format&fm=pjpg&fit=crop&w=456&h=342&ixlib=js-2.0.0&s=0213793bd6afa303564c7356a07a9243'
+              'https://images.unsplash.com/photo-1659025435463-a039676b45a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
             ),
           ),
-        )
+        ),
       ],
     );
   }

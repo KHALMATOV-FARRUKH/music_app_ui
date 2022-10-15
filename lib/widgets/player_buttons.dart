@@ -13,29 +13,28 @@ class PlayerButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-
       children: [
         StreamBuilder<SequenceState?>(
-            stream: audioPlayer.sequenceStateStream,
-            builder: (context, index) {
-              return IconButton(
-                  onPressed: audioPlayer.hasPrevious ? audioPlayer.seekToPrevious : null,
-                iconSize: 45,
-                icon: const Icon(
-                  Icons.skip_previous,
-                  color: Colors.white,
-                ),
-              );
-            },
+          stream: audioPlayer.sequenceStateStream,
+          builder: (context, index) {
+            return IconButton(
+              onPressed:
+              audioPlayer.hasPrevious ? audioPlayer.seekToPrevious : null,
+              iconSize: 45,
+              icon: const Icon(
+                Icons.skip_previous,
+                color: Colors.white,
+              ),
+            );
+          },
         ),
-
         StreamBuilder<PlayerState>(
           stream: audioPlayer.playerStateStream,
           builder: (context, snapshot) {
-            if (snapshot.hasData){
+            if (snapshot.hasData) {
               final playerState = snapshot.data;
-              final processingState =
-                  playerState!.processingState;
+              final processingState = playerState!.processingState;
+
               if (processingState == ProcessingState.loading ||
                   processingState == ProcessingState.buffering) {
                 return Container(
@@ -44,7 +43,7 @@ class PlayerButtons extends StatelessWidget {
                   margin: const EdgeInsets.all(10.0),
                   child: const CircularProgressIndicator(),
                 );
-              } else if (!audioPlayer.playing){
+              } else if (!audioPlayer.playing) {
                 return IconButton(
                   onPressed: audioPlayer.play,
                   iconSize: 75,
@@ -53,7 +52,7 @@ class PlayerButtons extends StatelessWidget {
                     color: Colors.white,
                   ),
                 );
-              } else if (processingState!= ProcessingState.completed) {
+              } else if (processingState != ProcessingState.completed) {
                 return IconButton(
                   icon: const Icon(
                     Icons.pause_circle,
@@ -69,7 +68,8 @@ class PlayerButtons extends StatelessWidget {
                     color: Colors.white,
                   ),
                   iconSize: 75.0,
-                  onPressed: () => audioPlayer.seek(Duration.zero,
+                  onPressed: () => audioPlayer.seek(
+                    Duration.zero,
                     index: audioPlayer.effectiveIndices!.first,
                   ),
                 );
